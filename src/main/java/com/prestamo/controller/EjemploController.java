@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.prestamo.entity.Ejemplo;
 import com.prestamo.service.EjemploService;
@@ -30,8 +31,14 @@ public class EjemploController {
 	@Autowired
 	private EjemploService ejemploService;
 	
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	@GetMapping("/lista")
 	public ResponseEntity<List<Ejemplo>> lista(){
+
+		restTemplate.postForObject("http://localhost:8091/url/auditoria/registrar?tipoBaseDatos=MYSQL&baseDeDatos=Sistema_Biblioteca&tabla=ejemplo", null, String.class);
+
 		List<Ejemplo> lstSalida = ejemploService.listaEjemplo();
 		return ResponseEntity.ok(lstSalida);
 	}
