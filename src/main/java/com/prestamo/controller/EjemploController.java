@@ -37,7 +37,7 @@ public class EjemploController {
 	@GetMapping("/lista")
 	public ResponseEntity<List<Ejemplo>> lista(){
 
-		restTemplate.postForObject("http://localhost:8091/url/auditoria/registrar?tipoBaseDatos=MYSQL&baseDeDatos=Sistema_Biblioteca&tabla=ejemplo", null, String.class);
+		restTemplate.postForObject("http://localhost:8091/url/auditoria/registra/MYSQL-sistemaPrestamo-Ejemplo-lista", null, String.class);
 
 		List<Ejemplo> lstSalida = ejemploService.listaEjemplo();
 		return ResponseEntity.ok(lstSalida);
